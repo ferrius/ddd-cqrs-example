@@ -1,0 +1,5 @@
+../var/**
+../vendor/**
+../.env.local
+../.env.*.local
+../config/jwt

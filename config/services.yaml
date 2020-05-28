@@ -15,13 +15,35 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        exclude:
+            - '../src/Core/Domain/Model'
+            - '../src/Shared/Infrastructure/Migration'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
+    App\Core\UI\Rest\:
+        resource: '../src/Core/UI/Rest'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    command_handlers:
+        namespace: App\Core\Application\Command\
+        resource: '%kernel.project_dir%/src/Core/Application/Command/*/*/*CommandHandler.php'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: command.bus }
+
+    query_handlers:
+        namespace: App\Core\Application\Query\
+        resource: '%kernel.project_dir%/src/Core/Application/Query/*/*/*QueryHandler.php'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: query.bus }
+
+    event_handlers:
+        namespace: App\Core\Application\
+        resource: '%kernel.project_dir%/src/Core/Application/**/*EventHandler.php'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: event.bus }
+
+
+    App\Shared\Infrastructure\Doctrine\DomainEventSubscriber:
+        tags: [{name: 'doctrine.event_subscriber'}]

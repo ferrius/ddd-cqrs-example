@@ -1,0 +1,63 @@
+version: "3.4"
+
+services:
+  php-fpm:
+    build:
+      context: ./php-fpm
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+      - ..:/var/www/:rw
+    depends_on:
+      - db
+    networks:
+      - main
+
+  db:
+    build:
+      context: ./mysql
+    volumes:
+      - db-data:/var/lib/mysql:rw
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    networks:
+      - main
+
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ..:/var/www:rw
+    ports:
+      - "${NGINX_HOST_HTTP_PORT}:80"
+      - "${NGINX_HOST_HTTPS_PORT}:443"
+    depends_on:
+      - php-fpm
+    networks:
+      - main
+
+  workplace:
+    build:
+      context: ./workplace
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+      - ..:/var/www/:rw
+    tty: true
+    depends_on:
+      - db
+    networks:
+      - main
+
+volumes:
+  db-data: {}
+
+networks:
+  main:

@@ -1,0 +1,14 @@
+App\Core\Application\Query\Task\DTO\TaskDTO:
+  attributes:
+    id:
+      groups: ['task_view']
+    title:
+      groups: ['task_view']
+    description:
+      groups: ['task_view']
+    status:
+      groups: ['task_view']
+    executionDay:
+      groups: ['task_view']
+    createdAt:
+      groups: ['task_view']
