@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Core\Domain\Model\Task;
 
 use App\Core\Domain\Model\User\User;
-use App\Shared\Domain\AggregateRoot;
 use App\Shared\Infrastructure\Assert\Assert;
+use App\Shared\Infrastructure\DDD\AggregateRoot;
 use App\Shared\Infrastructure\Exception\BusinessLogicViolationException;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ * @ORM\Table(indexes={@ORM\Index(name="task_status_idx", columns={"status"})})
  */
 class Task extends AggregateRoot
 {

@@ -45,7 +45,7 @@ setup_dev:
 ##################
 
 .PHONY: analyze
-analyze: cs_check phpmnd phpcpd phpstan security_check schema_validate phpunit
+analyze: deptrac cs_check phpmnd phpcpd phpstan security_check schema_validate phpunit
 
 .PHONY: cs_check
 cs_check:
@@ -75,6 +75,10 @@ security_check:
 .PHONY: phpstan
 phpstan:
 	php ./vendor/bin/phpstan analyse src -c phpstan.neon
+
+.PHONY: deptrac
+deptrac:
+	php ./vendor/bin/deptrac analyze depfile.yaml
 
 .PHONY: phpunit
 phpunit:

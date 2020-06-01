@@ -1,0 +1,39 @@
+paths:
+  - ./src
+exclude_files:
+  - Kernel.php
+layers:
+  - name: CoreApplication
+    collectors:
+      - type: className
+        regex: .*App\\Core\\Application\\.*
+  - name: CoreDomain
+    collectors:
+      - type: className
+        regex: .*App\\Core\\Domain\\.*
+  - name: CoreInfrastructure
+    collectors:
+      - type: className
+        regex: .*App\\Core\\Infrastructure\\.*
+  - name: CoreUi
+    collectors:
+      - type: className
+        regex: .*App\\Core\\UI\\.*
+  - name: SharedInfrastructureHelperLibs
+    collectors:
+      - type: className
+        regex: .*App\\Shared\\Infrastructure\\.*
+ruleset:
+  CoreApplication:
+    - CoreDomain
+    - CoreInfrastructure
+    - SharedInfrastructureHelperLibs
+  CoreDomain:
+    - SharedInfrastructureHelperLibs
+  CoreInfrastructure:
+    - CoreDomain
+    - SharedInfrastructureHelperLibs
+  CoreUi:
+    - CoreApplication
+    - SharedInfrastructureHelperLibs
+  SharedInfrastructureHelperLibs: ~

@@ -26,3 +26,7 @@
 
 .php_cs.cache
 docker/.env
+
+###> sensiolabs-de/deptrac-shim ###
+/.deptrac.cache
+###< sensiolabs-de/deptrac-shim ###

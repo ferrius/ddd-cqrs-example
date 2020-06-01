@@ -29,6 +29,7 @@
         "phpstan/phpstan-webmozart-assert": "^0.12.4",
         "phpunit/phpunit": "^9.1",
         "sebastian/phpcpd": "^5.0",
+        "sensiolabs-de/deptrac-shim": "^0.7.1",
         "symfony/debug-pack": "^1.0",
         "symfony/maker-bundle": "^1.18",
         "symfony/test-pack": "^1.0"

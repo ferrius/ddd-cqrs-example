@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Domain\Model\Task;
 
-use App\Shared\Domain\DomainEventInterface;
+use App\Shared\Infrastructure\DDD\DomainEventInterface;
 
 final class TaskDeclinedEvent implements DomainEventInterface
 {
