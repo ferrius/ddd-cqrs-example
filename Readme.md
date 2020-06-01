@@ -10,6 +10,20 @@ All UI is are the REST endpoints.
 * `make run php bin/console app:create-user` - create a user
 * `http://127.0.0.1:888/api/doc` `https://127.0.0.1:444/api/doc` - api doc
 
+### Some words about docker
+In project is used workplace container for code manipulations, CI or building. It was created for preventing of pollution
+of working containers (php-fpm) of unused in request, building tools like nodejs, composer, dev libs and so on.
+Also was created a local user based on host machine user PUID PGID to resolve conflicts with file permissions.
+
+`make dev` - jump into workplace container
+
+### CI
+```
+make dev
+//in container execute
+make analyze
+```
+
 ### Implementation
 Used symfony messenger component to create transactional command bus, query bus and event bus.
 Query model represented by DTOs. Domain and Command layers are covered by unit tests. 
@@ -33,7 +47,6 @@ Query model represented by DTOs. Domain and Command layers are covered by unit t
 │       ├── Cli
 │       └── Rest
 └── Shared
-    ├── Domain
     └── Infrastructure
 
 ```
