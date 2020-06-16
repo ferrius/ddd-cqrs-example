@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Application\Service\Task\LogTaskLiveCycleChanges;
+namespace App\Core\Application\EventHandler\Task\LogTaskLiveCycleChanges;
 
 use App\Core\Domain\Model\Task\TaskDeclinedEvent;
 use Psr\Log\LoggerInterface;

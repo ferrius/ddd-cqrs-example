@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\UI\Rest\Task;
+namespace App\Core\Ports\Rest\Task;
 
 use App\Core\Application\Command\Task\MakeTaskDeclined\MakeTaskDeclinedCommand;
 use App\Shared\Infrastructure\Http\HttpSpec;

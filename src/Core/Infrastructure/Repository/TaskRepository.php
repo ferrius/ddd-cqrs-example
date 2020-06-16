@@ -5,31 +5,32 @@ declare(strict_types=1);
 namespace App\Core\Infrastructure\Repository;
 
 use App\Core\Domain\Model\Task\Task;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Core\Domain\Model\Task\TaskRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * @method Task|null find($id, $lockMode = null, $lockVersion = null)
- * @method Task|null findOneBy(array $criteria, array $orderBy = null)
- * @method Task[]    findAll()
- * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class TaskRepository extends ServiceEntityRepository
+class TaskRepository implements TaskRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private EntityManagerInterface $em;
+
+    public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct($registry, Task::class);
+        $this->em = $em;
     }
 
-    public function add(Task $user): void
+    public function find(int $id): ?Task
     {
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
+        return $this->em->find(Task::class, $id);
     }
 
-    public function remove(Task $user): void
+    public function add(Task $task): void
     {
-        $this->getEntityManager()->remove($user);
-        $this->getEntityManager()->flush();
+        $this->em->persist($task);
+        $this->em->flush();
+    }
+
+    public function remove(Task $task): void
+    {
+        $this->em->remove($task);
+        $this->em->flush();
     }
 }

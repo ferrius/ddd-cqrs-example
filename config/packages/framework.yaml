@@ -19,4 +19,4 @@ framework:
         name_converter: 'serializer.name_converter.camel_case_to_snake_case'
         mapping:
             paths:
-                - '%kernel.project_dir%/src/Core/UI/Rest/SerializerMapping'
+                - '%kernel.project_dir%/src/Core/Ports/Rest/SerializerMapping'

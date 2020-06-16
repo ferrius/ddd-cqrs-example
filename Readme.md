@@ -1,7 +1,22 @@
 ### About
 This is an example of implementation and my vision of **practical** CQRS, DDD, ADR, hexagonal architecture and directory structure.
-Project has one entity `Task`. Have a basic CRUD operations and make tasks done and decline. 
-All UI is are the REST endpoints.
+Project has entities `Task` and `User`.
+All UI is the REST endpoints.
+
+### What is done
+* Hexagonal Architecture (`Ports` directory for external endpoints)
+* CQRS (based on symfony messenger component command/query buses with middlewares)
+* DDD: directory structure (used sensiolabs-de/deptrac to control layers dependencies)
+* DDD: core bounded context
+* DDD: domain events implementation
+* DDD: example of specification in User entity that requires a db query
+
+### To do
+* Add another bounded context
+* Add anti-corruption layer for interaction between contexts
+
+### My assumptions
+* I placed entities public getters and private setters into the traits with *GS suffix to make entities a little bit clear (phpstorm tracks fine all references to entity classes) anyway you can put getters with setters in the same class
 
 ### How to install the project
 * `bash setup_env.sh dev` - to setup .env.local docker/.env
@@ -43,7 +58,7 @@ Query model represented by DTOs. Domain and Command layers are covered by unit t
 │   │       └── User
 │   ├── Infrastructure
 │   │   └── Repository
-│   └── UI
+│   └── Ports
 │       ├── Cli
 │       └── Rest
 └── Shared

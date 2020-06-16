@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core\UI\Rest\AuthToken;
+namespace App\Core\Ports\Rest\Task;
 
-use App\Core\Application\Command\AuthToken\CreateAuthToken\CreateAuthTokenCommand;
+use App\Core\Application\Command\Task\CreateTask\CreateTaskCommand;
 use App\Shared\Infrastructure\Http\HttpSpec;
 use App\Shared\Infrastructure\Http\ParamFetcher;
 use Swagger\Annotations as SWG;
@@ -14,18 +14,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
-final class CreateAuthTokenAction
+final class CreateTaskAction
 {
     use HandleTrait;
 
-    public function __construct(MessageBusInterface $commandBus)
+    private RouterInterface $router;
+
+    public function __construct(MessageBusInterface $commandBus, RouterInterface $router)
     {
         $this->messageBus = $commandBus;
+        $this->router = $router;
     }
 
     /**
-     * @Route("/api/auth-token", methods={"POST"})
+     * @Route("/api/tasks", methods={"POST"})
      *
      * @param Request $request
      *
@@ -39,30 +43,31 @@ final class CreateAuthTokenAction
      *          format="application/json",
      *          @SWG\Schema(
      *              type="object",
-     *              @SWG\Property(property="username", type="string"),
-     *              @SWG\Property(property="password", type="string"),
+     *              @SWG\Property(property="title", type="string"),
+     *              @SWG\Property(property="execution_day", type="string"),
+     *              @SWG\Property(property="description", type="string"),
      *          )
      * )
      *
-     * @SWG\Response(
-     *     response=Response::HTTP_CREATED,
-     *     description=HttpSpec::STR_HTTP_CREATED,
-     *     @SWG\Schema(@SWG\Property(property="token", type="string"))
-     * )
+     * @SWG\Response(response=Response::HTTP_CREATED, description=HttpSpec::STR_HTTP_CREATED)
      * @SWG\Response(response=Response::HTTP_BAD_REQUEST, description=HttpSpec::STR_HTTP_BAD_REQUEST)
      * @SWG\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
      *
-     * @SWG\Tag(name="Auth token")
+     * @SWG\Tag(name="Task")
      */
     public function __invoke(Request $request): Response
     {
         $paramFetcher = ParamFetcher::fromRequestBody($request);
 
-        $token = $this->handle(new CreateAuthTokenCommand(
-            $paramFetcher->getRequiredString('username'),
-            $paramFetcher->getRequiredString('password')
-        ));
+        $command = new CreateTaskCommand(
+            $paramFetcher->getRequiredString('title'),
+            $paramFetcher->getRequiredDate('execution_day'),
+            $paramFetcher->getNullableString('description') ?? '',
+        );
 
-        return new JsonResponse(['token' => $token], Response::HTTP_CREATED);
+        $id = $this->handle($command);
+        $resourceUrl = $this->router->generate('api_get_task', ['id' => $id]);
+
+        return new JsonResponse(null, Response::HTTP_CREATED, [HttpSpec::HEADER_LOCATION => $resourceUrl]);
     }
 }

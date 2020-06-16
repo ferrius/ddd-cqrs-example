@@ -1,5 +1,5 @@
 controllers:
-    resource: ../../src/Core/UI/Rest/
+    resource: ../../src/Core/Ports/Rest/
     type: annotation
 kernel:
     resource: ../../src/Kernel.php

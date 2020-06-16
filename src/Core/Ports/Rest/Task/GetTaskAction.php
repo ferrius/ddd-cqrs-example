@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\UI\Rest\Task;
+namespace App\Core\Ports\Rest\Task;
 
 use App\Core\Application\Query\Task\DTO\TaskDTO;
 use App\Core\Application\Query\Task\GetTask\GetTaskQuery;

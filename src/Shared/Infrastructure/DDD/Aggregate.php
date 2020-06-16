@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\DDD;
 
-abstract class AggregateRoot
+abstract class Aggregate implements EntityInterface
 {
     /**
      * @var DomainEventInterface[]

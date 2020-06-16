@@ -9,6 +9,7 @@ use App\Core\Domain\Model\Task\Task;
 use App\Core\Domain\Model\Task\TaskCreatedEvent;
 use App\Core\Domain\Model\Task\TaskDeclinedEvent;
 use App\Core\Domain\Model\Task\TaskDoneEvent;
+use App\Core\Domain\Model\User\UniqueUsernameSpecificationInterface;
 use App\Core\Domain\Model\User\User;
 use App\Shared\Infrastructure\Exception\BusinessLogicViolationException;
 use App\Shared\Infrastructure\Exception\InvalidInputDataException;
@@ -162,6 +163,9 @@ final class TaskTest extends TestCase
 
     private function getUser(): User
     {
-        return new User('Test', 'pass_hash');
+        $specification = $this->createMock(UniqueUsernameSpecificationInterface::class);
+        $specification->method('isSatisfiedBy')->willReturn(true);
+
+        return new User('Test', 'pass_hash', $specification);
     }
 }

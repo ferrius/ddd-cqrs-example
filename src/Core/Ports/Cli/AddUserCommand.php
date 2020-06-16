@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\UI\Cli;
+namespace App\Core\Ports\Cli;
 
 use App\Core\Application\Command\User\CreateUser\CreateUserCommand;
 use Symfony\Component\Console\Command\Command;
