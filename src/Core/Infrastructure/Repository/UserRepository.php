@@ -5,30 +5,42 @@ declare(strict_types=1);
 namespace App\Core\Infrastructure\Repository;
 
 use App\Core\Domain\Model\User\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Core\Domain\Model\User\UserRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class UserRepository extends ServiceEntityRepository
+class UserRepository implements UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private EntityManagerInterface $em;
+
+    public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct($registry, User::class);
+        $this->em = $em;
+    }
+
+    public function find(int $id): ?User
+    {
+        return $this->em->find(User::class, $id);
     }
 
     public function findUserByUserName(string $username): ?User
     {
-        return $this->findOneBy(['username' => $username]);
+        return $this->em->createQueryBuilder()
+            ->select('u')
+            ->from(User::class, 'u')
+            ->where('u.username = :username')
+            ->setParameters(['username' => $username])
+            ->getQuery()->getOneOrNullResult();
     }
 
     public function add(User $user): void
     {
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
+        $this->em->persist($user);
+        $this->em->flush();
+    }
+
+    public function remove(User $user): void
+    {
+        $this->em->remove($user);
+        $this->em->flush();
     }
 }

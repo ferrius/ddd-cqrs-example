@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Core\Application\Command\Task\DeleteTask;
 
-use App\Core\Infrastructure\Repository\TaskRepository;
+use App\Core\Domain\Model\Task\TaskRepositoryInterface;
 use App\Core\Infrastructure\Security\UserFetcherInterface;
 use App\Shared\Infrastructure\Exception\AccessForbiddenException;
 use App\Shared\Infrastructure\Exception\ResourceNotFoundException;
 
 final class DeleteTaskCommandHandler
 {
-    private TaskRepository $taskRepository;
+    private TaskRepositoryInterface $taskRepository;
 
     private UserFetcherInterface $userFetcher;
 
-    public function __construct(TaskRepository $taskRepository, UserFetcherInterface $userFetcher)
+    public function __construct(TaskRepositoryInterface $taskRepository, UserFetcherInterface $userFetcher)
     {
         $this->taskRepository = $taskRepository;
         $this->userFetcher = $userFetcher;

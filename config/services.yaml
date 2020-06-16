@@ -16,11 +16,10 @@ services:
     App\:
         resource: '../src/*'
         exclude:
-            - '../src/Core/Domain/Model'
             - '../src/Shared/Infrastructure/Migration'
 
-    App\Core\UI\Rest\:
-        resource: '../src/Core/UI/Rest'
+    App\Core\Ports\Rest\:
+        resource: '../src/Core/Ports/Rest'
         tags: ['controller.service_arguments']
 
     command_handlers:
@@ -43,7 +42,6 @@ services:
         autoconfigure: false
         tags:
             - { name: messenger.message_handler, bus: event.bus }
-
 
     App\Shared\Infrastructure\Doctrine\DomainEventSubscriber:
         tags: [{name: 'doctrine.event_subscriber'}]

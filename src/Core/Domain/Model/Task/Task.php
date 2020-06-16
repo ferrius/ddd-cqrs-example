@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Domain\Model\Task;
 
 use App\Core\Domain\Model\User\User;
-use App\Shared\Infrastructure\Assert\Assert;
-use App\Shared\Infrastructure\DDD\AggregateRoot;
+use App\Shared\Infrastructure\DDD\Aggregate;
 use App\Shared\Infrastructure\Exception\BusinessLogicViolationException;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,8 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(indexes={@ORM\Index(name="task_status_idx", columns={"status"})})
  */
-class Task extends AggregateRoot
+class Task extends Aggregate
 {
+    use TaskGS;
+
     public const MIN_TITLE_LENGTH = 5;
     public const MAX_TITLE_LENGTH = 100;
     public const MAX_DESCRIPTION_LENGTH = 100;
@@ -97,8 +98,8 @@ class Task extends AggregateRoot
             throw new BusinessLogicViolationException('Declined task can\'t be done');
         }
 
-        $this->raise(new TaskDoneEvent($this));
         $this->setStatus(Status::DONE());
+        $this->raise(new TaskDoneEvent($this));
     }
 
     public function decline(): void
@@ -111,84 +112,7 @@ class Task extends AggregateRoot
             throw new BusinessLogicViolationException('Done task can\'t be declined');
         }
 
-        $this->raise(new TaskDeclinedEvent($this));
         $this->setStatus(Status::DECLINED());
-    }
-
-    // Getters
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function getExecutionDay(): \DateTimeImmutable
-    {
-        return $this->executionDay;
-    }
-
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function getStatus(): Status
-    {
-        return $this->status;
-    }
-
-    public function getCreatedAt(): \DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    // Private Setters
-
-    private function setTitle(string $title): void
-    {
-        Assert::minLength($title, self::MIN_TITLE_LENGTH, 'Title should contain at least %2$s characters. Got: %s');
-        Assert::maxLength($title, self::MAX_TITLE_LENGTH, 'Title should contain at most %2$s characters. Got: %s');
-        $this->title = $title;
-    }
-
-    private function setDescription(string $description): void
-    {
-        Assert::maxLength($description, self::MAX_DESCRIPTION_LENGTH, 'Description should contain at most %2$s characters. Got: %s');
-        $this->description = $description;
-    }
-
-    private function setUser(User $user): void
-    {
-        $this->user = $user;
-    }
-
-    private function setStatus(Status $status): void
-    {
-        $this->status = $status;
-    }
-
-    private function setExecutionDay(\DateTimeImmutable $executionDay): void
-    {
-        $executionDayNormalized = $executionDay->setTime(0, 0);
-        $now = (new \DateTimeImmutable())->setTime(0, 0);
-
-        Assert::greaterThanEq($executionDayNormalized, $now, 'Execution day should be not in past');
-
-        $this->executionDay = $executionDayNormalized;
-    }
-
-    private function setCreatedAt(\DateTimeImmutable $createdAt): void
-    {
-        $this->createdAt = $createdAt;
+        $this->raise(new TaskDeclinedEvent($this));
     }
 }

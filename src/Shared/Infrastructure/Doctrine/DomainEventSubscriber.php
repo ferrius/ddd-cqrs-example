@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Doctrine;
 
-use App\Shared\Infrastructure\DDD\AggregateRoot;
+use App\Shared\Infrastructure\DDD\Aggregate;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
@@ -14,7 +14,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class DomainEventSubscriber implements EventSubscriber
 {
     /**
-     * @var AggregateRoot[]
+     * @var Aggregate[]
      */
     private array $entities = [];
 
@@ -63,7 +63,7 @@ final class DomainEventSubscriber implements EventSubscriber
     {
         $entity = $args->getEntity();
 
-        if (!($entity instanceof AggregateRoot)) {
+        if (!($entity instanceof Aggregate)) {
             return;
         }
 

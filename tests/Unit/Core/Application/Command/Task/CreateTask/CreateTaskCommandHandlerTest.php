@@ -7,8 +7,9 @@ namespace App\Tests\Unit\Core\Application\Command\Task\CreateTask;
 use App\Core\Application\Command\Task\CreateTask\CreateTaskCommand;
 use App\Core\Application\Command\Task\CreateTask\CreateTaskCommandHandler;
 use App\Core\Domain\Model\Task\Task;
+use App\Core\Domain\Model\Task\TaskRepositoryInterface;
+use App\Core\Domain\Model\User\UniqueUsernameSpecificationInterface;
 use App\Core\Domain\Model\User\User;
-use App\Core\Infrastructure\Repository\TaskRepository;
 use App\Core\Infrastructure\Security\UserFetcherInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +21,7 @@ final class CreateTaskCommandHandlerTest extends TestCase
         $title = 'Some title';
         $description = 'Some description';
 
-        $repository = $this->createMock(TaskRepository::class);
+        $repository = $this->createMock(TaskRepositoryInterface::class);
         $repository->expects(self::once())
             ->method('add')
             ->with(self::callback(
@@ -30,7 +31,7 @@ final class CreateTaskCommandHandlerTest extends TestCase
             ));
 
         $userFetcher = $this->createMock(UserFetcherInterface::class);
-        $userFetcher->method('fetchRequiredUser')->willReturn(new User('name', 'pass_hash'));
+        $userFetcher->method('fetchRequiredUser')->willReturn(new User('name', 'pass_hash', $this->getUniqueUsernameSpecification()));
 
         $command = new CreateTaskCommand($title, $executionDay, $description);
         $handler = new CreateTaskCommandHandler($repository, $userFetcher);
@@ -43,5 +44,13 @@ final class CreateTaskCommandHandlerTest extends TestCase
                 throw $e;
             }
         }
+    }
+
+    private function getUniqueUsernameSpecification(): UniqueUsernameSpecificationInterface
+    {
+        $specification = $this->createMock(UniqueUsernameSpecificationInterface::class);
+        $specification->method('isSatisfiedBy')->willReturn(true);
+
+        return $specification;
     }
 }

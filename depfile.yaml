@@ -15,10 +15,10 @@ layers:
     collectors:
       - type: className
         regex: .*App\\Core\\Infrastructure\\.*
-  - name: CoreUi
+  - name: Ports
     collectors:
       - type: className
-        regex: .*App\\Core\\UI\\.*
+        regex: .*App\\Core\\Ports\\.*
   - name: SharedInfrastructureHelperLibs
     collectors:
       - type: className
@@ -33,7 +33,7 @@ ruleset:
   CoreInfrastructure:
     - CoreDomain
     - SharedInfrastructureHelperLibs
-  CoreUi:
+  Ports:
     - CoreApplication
     - SharedInfrastructureHelperLibs
   SharedInfrastructureHelperLibs: ~

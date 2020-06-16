@@ -7,8 +7,8 @@ namespace App\Tests\Unit\Core\Application\Command\Task\DeleteTask;
 use App\Core\Application\Command\Task\DeleteTask\DeleteTaskCommand;
 use App\Core\Application\Command\Task\DeleteTask\DeleteTaskCommandHandler;
 use App\Core\Domain\Model\Task\Task;
+use App\Core\Domain\Model\Task\TaskRepositoryInterface;
 use App\Core\Domain\Model\User\User;
-use App\Core\Infrastructure\Repository\TaskRepository;
 use App\Core\Infrastructure\Security\UserFetcherInterface;
 use App\Shared\Infrastructure\Exception\AccessForbiddenException;
 use App\Shared\Infrastructure\Exception\ResourceNotFoundException;
@@ -21,7 +21,7 @@ final class DeleteTaskCommandHandlerTest extends TestCase
     {
         $this->expectException(ResourceNotFoundException::class);
 
-        $repository = $this->createMock(TaskRepository::class);
+        $repository = $this->createMock(TaskRepositoryInterface::class);
         $repository->method('find')->willReturn(null);
 
         $userFetcher = $this->createMock(UserFetcherInterface::class);
@@ -40,7 +40,7 @@ final class DeleteTaskCommandHandlerTest extends TestCase
         $user = $this->createMock(User::class);
         $user->method('equals')->willReturn(false);
 
-        $repository = $this->createMock(TaskRepository::class);
+        $repository = $this->createMock(TaskRepositoryInterface::class);
         $repository->method('find')->willReturn(new Task('title', new \DateTimeImmutable(), $user));
 
         $userFetcher = $this->createMock(UserFetcherInterface::class);
@@ -58,7 +58,7 @@ final class DeleteTaskCommandHandlerTest extends TestCase
         $executionDay = (new \DateTimeImmutable())->setTime(0, 0);
         $description = 'Some description';
 
-        $repository = $this->createMock(TaskRepository::class);
+        $repository = $this->createMock(TaskRepositoryInterface::class);
         $repository->method('find')->willReturn(new Task($title, $executionDay, $this->getUser(), $description));
         $repository->expects(self::once())
             ->method('remove')
