@@ -63,6 +63,7 @@ Query model represented by DTOs. Domain and Command layers are covered by unit t
 │       ├── Cli
 │       └── Rest
 └── Shared
+    ├── Domain
     └── Infrastructure
 
 ```
