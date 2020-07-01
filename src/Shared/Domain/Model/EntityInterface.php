@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\DDD;
+namespace App\Shared\Domain\Model;
 
 interface EntityInterface
 {

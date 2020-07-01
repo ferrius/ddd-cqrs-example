@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Application\Command\AuthToken\CreateAuthToken;
 
-use App\Core\Infrastructure\Repository\UserRepository;
-use App\Shared\Infrastructure\Exception\InvalidInputDataException;
+use App\Core\Domain\Model\User\UserRepositoryInterface;
+use App\Shared\Domain\Exception\InvalidInputDataException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -13,13 +13,13 @@ final class CreateAuthTokenCommandHandler
 {
     private UserPasswordEncoderInterface $userPasswordEncoder;
 
-    private UserRepository $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     private JWTTokenManagerInterface $JWTTokenManager;
 
     public function __construct(
         UserPasswordEncoderInterface $userPasswordEncoder,
-        UserRepository $userRepository,
+        UserRepositoryInterface $userRepository,
         JWTTokenManagerInterface $JWTTokenManager
     ) {
         $this->userPasswordEncoder = $userPasswordEncoder;

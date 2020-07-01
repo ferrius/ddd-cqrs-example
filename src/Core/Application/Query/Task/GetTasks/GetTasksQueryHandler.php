@@ -6,7 +6,7 @@ namespace App\Core\Application\Query\Task\GetTasks;
 
 use App\Core\Application\Query\Task\DTO\TaskDTO;
 use App\Core\Domain\Model\Task\Task;
-use App\Core\Infrastructure\Security\UserFetcherInterface;
+use App\Core\Domain\Model\User\UserFetcherInterface;
 use App\Shared\Infrastructure\Type\DateTimeFormat;
 use App\Shared\Infrastructure\ValueObject\PaginatedData;
 use Doctrine\DBAL\Query\QueryBuilder;

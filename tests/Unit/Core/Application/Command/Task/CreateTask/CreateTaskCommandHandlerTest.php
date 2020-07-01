@@ -10,7 +10,7 @@ use App\Core\Domain\Model\Task\Task;
 use App\Core\Domain\Model\Task\TaskRepositoryInterface;
 use App\Core\Domain\Model\User\UniqueUsernameSpecificationInterface;
 use App\Core\Domain\Model\User\User;
-use App\Core\Infrastructure\Security\UserFetcherInterface;
+use App\Core\Domain\Model\User\UserFetcherInterface;
 use PHPUnit\Framework\TestCase;
 
 final class CreateTaskCommandHandlerTest extends TestCase

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Exception;
-
-use App\Shared\Domain\Exception\InvalidInputDataException;
+namespace App\Shared\Domain\Exception;
 
 final class ResourceNotFoundException extends InvalidInputDataException
 {

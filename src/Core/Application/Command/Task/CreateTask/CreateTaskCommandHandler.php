@@ -6,7 +6,7 @@ namespace App\Core\Application\Command\Task\CreateTask;
 
 use App\Core\Domain\Model\Task\Task;
 use App\Core\Domain\Model\Task\TaskRepositoryInterface;
-use App\Core\Infrastructure\Security\UserFetcherInterface;
+use App\Core\Domain\Model\User\UserFetcherInterface;
 
 final class CreateTaskCommandHandler
 {

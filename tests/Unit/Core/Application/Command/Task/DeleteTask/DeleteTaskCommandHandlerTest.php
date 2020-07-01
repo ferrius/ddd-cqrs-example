@@ -9,9 +9,9 @@ use App\Core\Application\Command\Task\DeleteTask\DeleteTaskCommandHandler;
 use App\Core\Domain\Model\Task\Task;
 use App\Core\Domain\Model\Task\TaskRepositoryInterface;
 use App\Core\Domain\Model\User\User;
-use App\Core\Infrastructure\Security\UserFetcherInterface;
-use App\Shared\Infrastructure\Exception\AccessForbiddenException;
-use App\Shared\Infrastructure\Exception\ResourceNotFoundException;
+use App\Core\Domain\Model\User\UserFetcherInterface;
+use App\Shared\Domain\Exception\AccessForbiddenException;
+use App\Shared\Domain\Exception\ResourceNotFoundException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

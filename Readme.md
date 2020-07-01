@@ -17,6 +17,7 @@ All UI is the REST endpoints.
 
 ### My assumptions
 * I placed entities public getters and private setters into the traits with *GS suffix to make entities a little bit clear (phpstorm tracks fine all references to entity classes) anyway you can put getters with setters in the same class
+* Unfortunately mysql has a poor performance with primary uuids. Of course prefer application generated uuid if database supports them.
 
 ### How to install the project
 * `bash setup_env.sh dev` - to setup .env.local docker/.env

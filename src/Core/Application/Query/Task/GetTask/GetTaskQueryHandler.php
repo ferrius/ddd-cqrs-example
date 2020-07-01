@@ -6,9 +6,9 @@ namespace App\Core\Application\Query\Task\GetTask;
 
 use App\Core\Application\Query\Task\DTO\TaskDTO;
 use App\Core\Domain\Model\Task\Task;
-use App\Core\Infrastructure\Security\UserFetcherInterface;
-use App\Shared\Infrastructure\Exception\AccessForbiddenException;
-use App\Shared\Infrastructure\Exception\ResourceNotFoundException;
+use App\Core\Domain\Model\User\UserFetcherInterface;
+use App\Shared\Domain\Exception\AccessForbiddenException;
+use App\Shared\Domain\Exception\ResourceNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class GetTaskQueryHandler

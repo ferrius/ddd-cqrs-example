@@ -6,7 +6,7 @@ layers:
   - name: CoreApplication
     collectors:
       - type: className
-        regex: .*App\\Core\\Application\\.*
+        regex: .*App\\Core\\Application\\(?!Query).*
   - name: CoreDomain
     collectors:
       - type: className
@@ -15,25 +15,30 @@ layers:
     collectors:
       - type: className
         regex: .*App\\Core\\Infrastructure\\.*
-  - name: Ports
+  - name: CorePorts
     collectors:
       - type: className
         regex: .*App\\Core\\Ports\\.*
-  - name: SharedInfrastructureHelperLibs
+  - name: SharedDomain
+    collectors:
+      - type: className
+        regex: .*App\\Shared\\Domain\\.*
+  - name: SharedInfrastructure
     collectors:
       - type: className
         regex: .*App\\Shared\\Infrastructure\\.*
 ruleset:
   CoreApplication:
     - CoreDomain
-    - CoreInfrastructure
-    - SharedInfrastructureHelperLibs
+    - SharedDomain
   CoreDomain:
-    - SharedInfrastructureHelperLibs
+    - SharedDomain
+  CorePorts:
+    - CoreApplication
+    - CoreInfrastructure
+    - SharedInfrastructure
   CoreInfrastructure:
     - CoreDomain
-    - SharedInfrastructureHelperLibs
-  Ports:
-    - CoreApplication
-    - SharedInfrastructureHelperLibs
-  SharedInfrastructureHelperLibs: ~
+  SharedDomain: ~
+  SharedInfrastructure:
+    - SharedDomain

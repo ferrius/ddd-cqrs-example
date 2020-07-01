@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Domain\Model\Task;
 
-use App\Shared\Infrastructure\DDD\DomainEventInterface;
+use App\Shared\Domain\Model\DomainEventInterface;
 
 final class TaskDoneEvent implements DomainEventInterface
 {

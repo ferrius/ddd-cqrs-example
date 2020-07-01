@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Core\Domain\Model\Task;
 
 use App\Core\Domain\Model\User\User;
-use App\Shared\Infrastructure\DDD\Aggregate;
-use App\Shared\Infrastructure\Exception\BusinessLogicViolationException;
+use App\Shared\Domain\Exception\BusinessLogicViolationException;
+use App\Shared\Domain\Model\Aggregate;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

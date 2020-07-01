@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Domain\Model\User;
 
-use App\Shared\Infrastructure\DDD\Aggregate;
-use App\Shared\Infrastructure\Exception\InvalidInputDataException;
+use App\Shared\Domain\Exception\InvalidInputDataException;
+use App\Shared\Domain\Model\Aggregate;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 

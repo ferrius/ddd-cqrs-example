@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Core\Domain\Model\Task;
 
 use App\Core\Domain\Model\Task\Status;
-use App\Shared\Infrastructure\Exception\InvalidInputDataException;
+use App\Shared\Domain\Exception\InvalidInputDataException;
 use PHPUnit\Framework\TestCase;
 
 final class StatusTest extends TestCase

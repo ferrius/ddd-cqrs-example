@@ -11,8 +11,8 @@ use App\Core\Domain\Model\Task\TaskDeclinedEvent;
 use App\Core\Domain\Model\Task\TaskDoneEvent;
 use App\Core\Domain\Model\User\UniqueUsernameSpecificationInterface;
 use App\Core\Domain\Model\User\User;
-use App\Shared\Infrastructure\Exception\BusinessLogicViolationException;
-use App\Shared\Infrastructure\Exception\InvalidInputDataException;
+use App\Shared\Domain\Exception\BusinessLogicViolationException;
+use App\Shared\Domain\Exception\InvalidInputDataException;
 use PHPUnit\Framework\TestCase;
 
 final class TaskTest extends TestCase

@@ -6,7 +6,7 @@ namespace App\Tests\Unit\Core\Domain\Model\User;
 
 use App\Core\Domain\Model\User\UniqueUsernameSpecificationInterface;
 use App\Core\Domain\Model\User\User;
-use App\Shared\Infrastructure\Exception\InvalidInputDataException;
+use App\Shared\Domain\Exception\InvalidInputDataException;
 use PHPUnit\Framework\TestCase;
 
 final class UserTest extends TestCase

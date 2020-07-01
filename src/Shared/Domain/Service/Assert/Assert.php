@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Service\Assert;
 
-use App\Shared\Infrastructure\Exception\InvalidInputDataException;
+use App\Shared\Domain\Exception\InvalidInputDataException;
 use Webmozart\Assert\Assert as WebmozartAssert;
 
 final class Assert extends WebmozartAssert

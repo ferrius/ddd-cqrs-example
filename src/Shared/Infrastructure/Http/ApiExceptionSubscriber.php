@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Http;
 
-use App\Shared\Infrastructure\Exception\AccessForbiddenException;
-use App\Shared\Infrastructure\Exception\InvalidInputDataException;
-use App\Shared\Infrastructure\Exception\ResourceNotFoundException;
+use App\Shared\Domain\Exception\AccessForbiddenException;
+use App\Shared\Domain\Exception\InvalidInputDataException;
+use App\Shared\Domain\Exception\ResourceNotFoundException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;

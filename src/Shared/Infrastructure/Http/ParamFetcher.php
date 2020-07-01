@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Http;
 
-use App\Shared\Infrastructure\Assert\Assert;
+use App\Shared\Domain\Service\Assert\Assert;
 use App\Shared\Infrastructure\Type\DateTimeFormat;
 use Symfony\Component\HttpFoundation\Request;
 

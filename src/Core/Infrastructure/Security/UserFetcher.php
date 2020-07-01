@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Infrastructure\Security;
 
 use App\Core\Domain\Model\User\User;
+use App\Core\Domain\Model\User\UserFetcherInterface;
 use Symfony\Component\Security\Core\Security;
 
 final class UserFetcher implements UserFetcherInterface

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Domain\Model\Task;
 
-use App\Shared\Infrastructure\Assert\Assert;
+use App\Shared\Domain\Service\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core\Application\Command\User\CreateUser;
 
+use App\Core\Domain\Model\User\UniqueUsernameSpecificationInterface;
 use App\Core\Domain\Model\User\User;
 use App\Core\Domain\Model\User\UserRepositoryInterface;
-use App\Core\Infrastructure\Specification\User\UniqueUsernameSpecification;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 final class CreateUserCommandHandler
@@ -15,12 +15,12 @@ final class CreateUserCommandHandler
 
     private UserRepositoryInterface $userRepository;
 
-    private UniqueUsernameSpecification $uniqueUsernameSpecification;
+    private UniqueUsernameSpecificationInterface $uniqueUsernameSpecification;
 
     public function __construct(
         EncoderFactoryInterface $encoderFactory,
         UserRepositoryInterface $userRepository,
-        UniqueUsernameSpecification $uniqueUsernameSpecification
+        UniqueUsernameSpecificationInterface $uniqueUsernameSpecification
     ) {
         $this->encoderFactory = $encoderFactory;
         $this->userRepository = $userRepository;

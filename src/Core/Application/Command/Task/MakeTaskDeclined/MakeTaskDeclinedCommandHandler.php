@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Core\Application\Command\Task\MakeTaskDeclined;
 
 use App\Core\Domain\Model\Task\TaskRepositoryInterface;
-use App\Core\Infrastructure\Security\UserFetcherInterface;
-use App\Shared\Infrastructure\Exception\AccessForbiddenException;
-use App\Shared\Infrastructure\Exception\ResourceNotFoundException;
+use App\Core\Domain\Model\User\UserFetcherInterface;
+use App\Shared\Domain\Exception\AccessForbiddenException;
+use App\Shared\Domain\Exception\ResourceNotFoundException;
 
 final class MakeTaskDeclinedCommandHandler
 {
