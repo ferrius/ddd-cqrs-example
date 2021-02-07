@@ -7,7 +7,7 @@ namespace App\Core\Ports\Rest\Task;
 use App\Core\Application\Command\Task\CreateTask\CreateTaskCommand;
 use App\Shared\Infrastructure\Http\HttpSpec;
 use App\Shared\Infrastructure\Http\ParamFetcher;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,25 +35,25 @@ final class CreateTaskAction
      *
      * @return Response
      *
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *          name="body",
      *          in="body",
      *          description="JSON Payload",
      *          required=true,
-     *          format="application/json",
-     *          @SWG\Schema(
+     *          content="application/json",
+     *          @OA\Schema(
      *              type="object",
-     *              @SWG\Property(property="title", type="string"),
-     *              @SWG\Property(property="execution_day", type="string"),
-     *              @SWG\Property(property="description", type="string"),
+     *              @OA\Property(property="title", type="string"),
+     *              @OA\Property(property="execution_day", type="string"),
+     *              @OA\Property(property="description", type="string"),
      *          )
      * )
      *
-     * @SWG\Response(response=Response::HTTP_CREATED, description=HttpSpec::STR_HTTP_CREATED)
-     * @SWG\Response(response=Response::HTTP_BAD_REQUEST, description=HttpSpec::STR_HTTP_BAD_REQUEST)
-     * @SWG\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
+     * @OA\Response(response=Response::HTTP_CREATED, description=HttpSpec::STR_HTTP_CREATED)
+     * @OA\Response(response=Response::HTTP_BAD_REQUEST, description=HttpSpec::STR_HTTP_BAD_REQUEST)
+     * @OA\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
      *
-     * @SWG\Tag(name="Task")
+     * @OA\Tag(name="Task")
      */
     public function __invoke(Request $request): Response
     {

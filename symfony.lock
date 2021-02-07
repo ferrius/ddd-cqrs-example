@@ -90,8 +90,11 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+    "lcobucci/clock": {
+        "version": "2.0.0"
+    },
     "lcobucci/jwt": {
-        "version": "3.3.2"
+        "version": "4.1.0"
     },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
@@ -450,7 +453,7 @@
         ]
     },
     "symfony/options-resolver": {
-        "version": "v5.0.8"
+        "version": "v5.0.11"
     },
     "symfony/orm-pack": {
         "version": "v1.0.8"
@@ -515,16 +518,16 @@
         ]
     },
     "symfony/security-core": {
-        "version": "v5.0.8"
+        "version": "v5.0.11"
     },
     "symfony/security-csrf": {
-        "version": "v5.0.8"
+        "version": "v5.0.11"
     },
     "symfony/security-guard": {
-        "version": "v5.0.8"
+        "version": "v5.0.11"
     },
     "symfony/security-http": {
-        "version": "v5.0.8"
+        "version": "v5.0.11"
     },
     "symfony/serializer": {
         "version": "v5.0.8"
@@ -606,6 +609,6 @@
         "version": "1.8.0"
     },
     "zircote/swagger-php": {
-        "version": "2.0.16"
+        "version": "3.1.0"
     }
 }

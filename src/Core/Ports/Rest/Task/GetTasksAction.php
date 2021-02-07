@@ -11,7 +11,7 @@ use App\Shared\Infrastructure\Http\ParamFetcher;
 use App\Shared\Infrastructure\ValueObject\PaginatedData;
 use App\Shared\Infrastructure\ValueObject\Pagination;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,41 +39,39 @@ final class GetTasksAction
      *
      * @return Response
      *
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="execution_day",
      *     in="query",
-     *     type="string",
-     *     description="Search phrase text"
+     *     description="Search phrase text",
+     *     @OA\Schema(type="string")
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="search",
      *     in="query",
-     *     type="string",
-     *     description="Search phrase text"
+     *     description="Search phrase text",
+     *     @OA\Schema(type="string")
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="limit",
      *     in="query",
-     *     type="integer",
-     *     default=Pagination::DEFAULT_LIMIT,
-     *     description="Number of result items"
+     *     description="Number of result items",
+     *     @OA\Schema(type="integer", default=Pagination::DEFAULT_LIMIT)
      * )
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *     name="offset",
      *     in="query",
-     *     type="integer",
-     *     default=Pagination::DEFAULT_OFFSET,
-     *     description="First result offset"
+     *     description="First result offset",
+     *     @OA\Schema(type="integer", default=Pagination::DEFAULT_OFFSET)
      * )
-     * @SWG\Response(
+     * @OA\Response(
      *     response=Response::HTTP_OK,
      *     description=HttpSpec::STR_HTTP_OK,
-     *     @SWG\Schema(type="array", @SWG\Items(ref=@Model(type=TaskDTO::class, groups={"task_view"})))
+     *     @OA\Schema(type="array", @OA\Items(ref=@Model(type=TaskDTO::class, groups={"task_view"})))
      * )
-     * @SWG\Response(response=Response::HTTP_BAD_REQUEST, description=HttpSpec::STR_HTTP_BAD_REQUEST)
-     * @SWG\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
+     * @OA\Response(response=Response::HTTP_BAD_REQUEST, description=HttpSpec::STR_HTTP_BAD_REQUEST)
+     * @OA\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
      *
-     * @SWG\Tag(name="Task")
+     * @OA\Tag(name="Task")
      */
     public function __invoke(Request $request): Response
     {

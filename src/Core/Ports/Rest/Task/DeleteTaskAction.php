@@ -7,7 +7,7 @@ namespace App\Core\Ports\Rest\Task;
 use App\Core\Application\Command\Task\DeleteTask\DeleteTaskCommand;
 use App\Shared\Infrastructure\Http\HttpSpec;
 use App\Shared\Infrastructure\Http\ParamFetcher;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,11 +31,11 @@ final class DeleteTaskAction
      *
      * @return Response
      *
-     * @SWG\Response(response=Response::HTTP_NO_CONTENT, description=HttpSpec::STR_HTTP_NO_CONTENT)
-     * @SWG\Response(response=Response::HTTP_NOT_FOUND, description=HttpSpec::STR_HTTP_NOT_FOUND)
-     * @SWG\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
+     * @OA\Response(response=Response::HTTP_NO_CONTENT, description=HttpSpec::STR_HTTP_NO_CONTENT)
+     * @OA\Response(response=Response::HTTP_NOT_FOUND, description=HttpSpec::STR_HTTP_NOT_FOUND)
+     * @OA\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
      *
-     * @SWG\Tag(name="Task")
+     * @OA\Tag(name="Task")
      */
     public function __invoke(Request $request): Response
     {

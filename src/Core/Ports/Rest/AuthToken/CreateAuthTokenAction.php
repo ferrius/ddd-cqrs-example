@@ -7,7 +7,7 @@ namespace App\Core\Ports\Rest\AuthToken;
 use App\Core\Application\Command\AuthToken\CreateAuthToken\CreateAuthTokenCommand;
 use App\Shared\Infrastructure\Http\HttpSpec;
 use App\Shared\Infrastructure\Http\ParamFetcher;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,28 +31,28 @@ final class CreateAuthTokenAction
      *
      * @return Response
      *
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *          name="body",
      *          in="body",
      *          description="JSON Payload",
      *          required=true,
-     *          format="application/json",
-     *          @SWG\Schema(
+     *          content="application/json",
+     *          @OA\Schema(
      *              type="object",
-     *              @SWG\Property(property="username", type="string"),
-     *              @SWG\Property(property="password", type="string"),
+     *              @OA\Property(property="username", type="string"),
+     *              @OA\Property(property="password", type="string"),
      *          )
      * )
      *
-     * @SWG\Response(
+     * @OA\Response(
      *     response=Response::HTTP_CREATED,
      *     description=HttpSpec::STR_HTTP_CREATED,
-     *     @SWG\Schema(@SWG\Property(property="token", type="string"))
+     *     @OA\Schema(@OA\Property(property="token", type="string"))
      * )
-     * @SWG\Response(response=Response::HTTP_BAD_REQUEST, description=HttpSpec::STR_HTTP_BAD_REQUEST)
-     * @SWG\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
+     * @OA\Response(response=Response::HTTP_BAD_REQUEST, description=HttpSpec::STR_HTTP_BAD_REQUEST)
+     * @OA\Response(response=Response::HTTP_UNAUTHORIZED, description=HttpSpec::STR_HTTP_UNAUTHORIZED)
      *
-     * @SWG\Tag(name="Auth token")
+     * @OA\Tag(name="Auth token")
      */
     public function __invoke(Request $request): Response
     {
