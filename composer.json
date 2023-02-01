@@ -17,7 +17,7 @@
         "symfony/framework-bundle": "5.0.*",
         "symfony/messenger": "5.0.*",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "5.0.*",
+        "symfony/security-bundle": "5.4.*",
         "symfony/serializer-pack": "^1.0",
         "symfony/twig-pack": "^1.0",
         "symfony/yaml": "5.0.*",
